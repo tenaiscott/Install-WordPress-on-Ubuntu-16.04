@@ -25,7 +25,7 @@ ssh user@ipaddress -p portnumber
 Install Apache2:
 
 ```
-sudo apt-get install Apache2
+sudo apt-get install apache2
 ```
 
 * Enter root user password, then enter y to continue
@@ -33,19 +33,19 @@ sudo apt-get install Apache2
 Start Apache: 
 
 ```
-sudo systemctl start Apache2
+sudo systemctl start apache2
 ```
 
 Enable Apache2 to start up automatically when the server boots:
 
 ```
-sudo systemctl enable Apache2
+sudo systemctl enable apache2
 ```
 
 Check to see if the Apache server is running:
 
 ```
-sudo systemctl status Apache2
+sudo systemctl status apache2
 ```
 
 *If Apache is running, you should see **Active: active (running)***
@@ -65,7 +65,7 @@ sudo rm /var/www/html/index.html
 Install MySQL:
 
 ```
-sudo apt-get install MySQL-server
+sudo apt-get install mysql-server
 ```
 
 * Enter y to continue.  You will be asked to set a password for the MySQL root user.  The root user has more privileges than other users.  It is important that you do not leave this field blank. 
@@ -73,7 +73,7 @@ sudo apt-get install MySQL-server
 I recommend that you run the following command to increase the security of your database:
 
 ```
-sudo MySQL_secure_installation
+sudo mysql_secure_installation
 ```
 
 * enter root password
@@ -87,11 +87,11 @@ sudo MySQL_secure_installation
 Now that your database is set up, you can enter the following commands to start MySQL and enable it to start automatically when the server boots:
 
 ```
-sudo systemctl start MySQL
+sudo systemctl start mysql
 ```
 
 ```
-sudo systemctl enable MySQL
+sudo systemctl enable mysql
 ```
 
 ## Step 4 -  Install PHP (if you already have php installed, you can skip this step)
@@ -99,14 +99,14 @@ sudo systemctl enable MySQL
 Install PHP by running the following command.  This will also install some helper systems that allow PHP to connect with Apache and MySQL.
 
 ```
-sudo apt-get install php7.0 libApache2-mod-php7.0 php7.0-MySQL php7.0-curl php7.0-mbstring php7.0-gd php7.0-xml php7.0-xmlrpc php7.0-intl php7.0-soap php7.0-zip
+sudo apt-get install php7.0 libApache2-mod-php7.0 php7.0-mysql php7.0-curl php7.0-mbstring php7.0-gd php7.0-xml php7.0-xmlrpc php7.0-intl php7.0-soap php7.0-zip
 ```
 * Enter y to continue
 
 Next, restart Apache:
 
 ```
-sudo systemctl restart Apache2
+sudo systemctl restart apache2
 ```
 
 ## Step 5 - Create a WordPress Database 
@@ -114,7 +114,7 @@ sudo systemctl restart Apache2
 Log in to MySQL as the root user:
 
 ```
-sudo MySQL -u root -p
+sudo mysql -u root -p
 ```
 
 * Enter root user password
@@ -128,13 +128,13 @@ CREATE DATABASE databasename;
 Create a new user:
 
 ```
-CREATE USER 'WordPressuser'@'localhost' IDENTIFIED BY 'password';
+CREATE USER 'wordpressuser'@'localhost' IDENTIFIED BY 'password';
 ```
 
 Grant the new user access to the database:
 
 ```
-GRANT ALL PRIVILEGES ON databasename.* TO 'WordPressuser'@'localhost';
+GRANT ALL PRIVILEGES ON databasename.* TO 'wordpressuser'@'localhost';
 ```
 
 Check that the database was successfully created:
@@ -158,11 +158,11 @@ EXIT;
 Restart Apache and MySQL:
 
 ```
-sudo systemctl restart Apache2
+sudo systemctl restart apache2
 ```
 
 ```
-sudo systemctl restart MySQL
+sudo systemctl restart mysql
 ```
 
 ## Step 6 - Download WordPress
@@ -176,7 +176,7 @@ cd /var/www/html
 Download the latest version of WordPress:
 
 ```
-sudo wget -c http://WordPress.org/latest.tar.gz
+sudo wget -c http://wordpress.org/latest.tar.gz
 ```
 
 Extract the file:
@@ -190,10 +190,10 @@ sudo tar -xzvf latest.tar.gz
 Correct permissions for WordPress with the following commands:
 
 ```
-sudo chown -R www-data:www-data /var/www/html/WordPress/
+sudo chown -R www-data:www-data /var/www/html/wordpress/
 ```
 ```
-sudo chmod -R 755 /var/www/html/WordPress/
+sudo chmod -R 755 /var/www/html/wordpress/
 ```
 
 ## Step 7 - Configure Apache2
@@ -209,7 +209,7 @@ sudo nano /etc/Apache2/sites-available/000-default.conf
 Add the following text to the configuration file with your own information.  Do not remove any of the other text already in the file.
 
 ```
-<Directory /var/www/WordPress/>
+<Directory /var/www/html/wordpress/>
     AllowOverride All
 </Directory>
 ```
@@ -224,7 +224,7 @@ sudo a2enmod rewrite
 
 Restart Apache:
 ```
-sudo systemctl restart Apache2
+sudo systemctl restart apache2
 ```
 
 ## Step 8 - Configure WordPress
@@ -232,7 +232,7 @@ sudo systemctl restart Apache2
 Rename the sample configuration file:
 
 ```
-cd /var/www/html/WordPress
+cd /var/www/html/wordpress
 ```
 
 ```
@@ -277,7 +277,7 @@ cd /var/www/html
 ```
 
 ```
-sudo rsync -av WordPress/* /var/www/html/
+sudo rsync -av wordpress/* /var/www/html/
 ```
 
 
