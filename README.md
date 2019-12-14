@@ -242,7 +242,7 @@ sudo mv wp-config-sample.php wp-config.php
 Open the WordPress configuration file:
 
 ```
-sudo nano /var/www/html/WordPress/wp-config.php
+sudo nano /var/www/html/wordpress/wp-config.php
 ```
 
 Enter your MySQL details in the following portion of the file:
@@ -250,10 +250,10 @@ Enter your MySQL details in the following portion of the file:
 ```
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define('DB_NAME', 'WordPress');
+define('DB_NAME', 'wordpress');
 
 /** MySQL database username */
-define('DB_USER', 'WordPressuser');
+define('DB_USER', 'wordpressuser');
 
 /** MySQL database password */
 define('DB_PASSWORD', 'user_password_here');
