@@ -203,7 +203,7 @@ Next we need to alter the default Apache2 configuration file
 Open the configuration file:
 
 ```
-sudo nano /etc/Apache2/sites-available/000-default.conf
+sudo nano /etc/apache2/sites-available/000-default.conf
 ```
 
 Add the following text to the configuration file with your own information.  Do not remove any of the other text already in the file.
